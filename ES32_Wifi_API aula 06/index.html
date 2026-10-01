@@ -165,7 +165,7 @@
 
       // COLE SUA CHAVE REAL AQUI
       const OPENWEATHER_API_KEY =
-        "COLE_SUA_CHAVE_AQUI";
+        "";
 
 
       // =====================================================
@@ -510,34 +510,34 @@
             "&lang=pt_br";
 
 
-          console.log(
-            "🌐 URL da API:",
-            url
-          );
-
-
           // Faz a requisição
 
           const resposta =
             await fetch(url);
 
 
+          const dados =
+            await resposta.json();
+
+
           // Verifica erro
 
           if (!resposta.ok) {
 
-            throw new Error(
-              "Não foi possível consultar a cidade. " +
-              "Verifique a cidade e a API Key."
-            );
+            let mensagemErro =
+              dados.message || resposta.statusText;
+
+            if (resposta.status === 401) {
+              mensagemErro =
+                "API Key inválida ou ainda não ativada. Confira sua chave OpenWeatherMap.";
+            } else if (resposta.status === 404) {
+              mensagemErro =
+                "Cidade não encontrada. Confira o nome da cidade e o país.";
+            }
+
+            throw new Error(mensagemErro);
 
           }
-
-
-          // Converte para JSON
-
-          const dados =
-            await resposta.json();
 
 
           console.log(

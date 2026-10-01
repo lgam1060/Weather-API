@@ -72,7 +72,7 @@ O usuário deve criar uma conta e gerar uma **API Key**.
 Depois, a chave deve ser configurada no código:
 
 ```javascript
-const OPENWEATHER_API_KEY = "SUA_CHAVE_AQUI";
+const OPENWEATHER_API_KEY = "COLE_SUA_CHAVE_AQUI";
 ```
 
 ### ⚠️ Importante
